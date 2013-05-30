@@ -1,0 +1,231 @@
+\documentclass[a4paper, DIV=16]{scrartcl}
+
+\usepackage{SIunits}
+\usepackage[european]{circuitikz}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{circuitikz}
+
+%% Row 1
+\draw
+(0, 0)
+	node[npn, rotate=90] (npn) {}
+	to node[anchor=south] {BC337} ++(0, 0)
+
+(npn.collector)
+	to [short] ++(-1, 0)
+	to [short] ++(0, -6)
+
+(npn.base)
+	to [R=330 \ohm] ++(0, -1.5)
+	to [short, -o] ++(0, -0.5)
+	to node[anchor=north] {Arduino A0} ++(0, 0)
+
+(npn.emitter)
+	to [short, -*] ++(1, 0)
+	to node[anchor=center] (c0x0) {} ++(0, 0)
+	to [leDo, l=r$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+
+(c0x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c1x0) {} ++(0, 0)
+	to [leDo, l=g$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+
+(c1x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+;
+\draw [dashed]
+(c2x0)
+	to [short, -*] ++(3, 0)
+	to node[anchor=center] (c13x0) {} ++(0, 0)
+;
+\draw
+(c13x0)
+	to [leDo, l=r$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+
+(c13x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c14x0) {} ++(0, 0)
+	to [leDo, l=g$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+
+(c14x0)
+	to [short] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -*] ++(0, -5)
+;
+
+%% Row 2
+\draw
+(0, -5)
+	node[npn, rotate=90] (npn) {}
+	to node[anchor=south] {BC337} ++(0, 0)
+
+(npn.collector)
+	to [short, -*] ++(-1, 0)
+	to [short] ++(0, -3.5)
+	to node[anchor=center] (5v) {} ++(0,0)
+
+(npn.base)
+	to [R=330 \ohm] ++(0, -1.5)
+	to [short, -o] ++(0, -0.5)
+	to node[anchor=north] {Arduino A1} ++(0, 0)
+
+(npn.emitter)
+	to [short, -*] ++(1, 0)
+	to node[anchor=center] (c0x0) {} ++(0, 0)
+	to [leDo, l=r$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c0) {} ++(0,0)
+
+(c0x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c1x0) {} ++(0, 0)
+	to [leDo, l=g$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c1) {} ++(0,0)
+
+(c1x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c2) {} ++(0,0)
+;
+\draw [dashed]
+(c2x0)
+	to [short, -*] ++(3, 0)
+	to node[anchor=center] (c13x0) {} ++(0, 0)
+;
+\draw
+(c13x0)
+	to [leDo, l=r$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c13) {} ++(0,0)
+
+(c13x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c14x0) {} ++(0, 0)
+	to [leDo, l=g$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c14) {} ++(0,0)
+
+(c14x0)
+	to [short] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short] ++(0, -2)
+	to node[anchor=center] (c15) {} ++(0,0)
+;
+
+%% Skip rows
+\draw [dashed]
+	(5v)
+		to [short] ++(0, -2.5)
+	(c0)
+		to [short, -*] ++(0, -4)
+	(c1)
+		to [short, -*] ++(0, -4)
+	(c2)
+		to [short, -*] ++(0, -4)
+	(c13)
+		to [short, -*] ++(0, -4)
+	(c14)
+		to [short, -*] ++(0, -4)
+	(c15)
+		to [short, -*] ++(0, -4)
+;
+
+%% Row 5
+\draw
+(0, -11)
+	node[npn, rotate=90] (npn) {}
+	to node[anchor=south] {BC337} ++(0, 0)
+
+(npn.collector)
+	to [short, -*] ++(-1, 0)
+	to [short, -o] ++(0, -3.5)
+	to node[anchor=north] {+5 \volt} ++(0, 0)
+
+(npn.base)
+	to [R=330 \ohm] ++(0, -1.5)
+	to [short, -o] ++(0, -0.5)
+	to node[anchor=north] {Arduino A4} ++(0, 0)
+
+(npn.emitter)
+	to [short, -*] ++(1, 0)
+	to node[anchor=center] (c0x0) {} ++(0, 0)
+	to [leDo, l=r$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -2)
+	to node[anchor=north] {TLC5940 Out 0} ++(0, 0)
+
+(c0x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c1x0) {} ++(0, 0)
+	to [leDo, l=g$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -3)
+	to node[anchor=north] {TLC5940 Out 1} ++(0, 0)
+
+(c1x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_0$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -4)
+	to node[anchor=north] {TLC5940 Out 2} ++(0, 0)
+;
+\draw [dashed]
+(c2x0)
+	to [short, -*] ++(3, 0)
+	to node[anchor=center] (c13x0) {} ++(0, 0)
+;
+\draw
+(c13x0)
+	to [leDo, l=r$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -2)
+	to node[anchor=north] {TLC5940 Out 12} ++(0, 0)
+
+(c13x0)
+	to [short, -*] ++(2, 0)
+	to node[anchor=center] (c14x0) {} ++(0, 0)
+	to [leDo, l=g$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -3)
+	to node[anchor=north] {TLC5940 Out 13} ++(0, 0)
+
+(c14x0)
+	to [short] ++(2, 0)
+	to node[anchor=center] (c2x0) {} ++(0, 0)
+	to [leDo, l=b$_4$] ++(0, -1.5)
+	to [short] ++(1, 0)
+	to [short, -o] ++(0, -4)
+	to node[anchor=north] {TLC5940 Out 14} ++(0, 0)
+;
+\end{circuitikz}
+
+\end{document}
