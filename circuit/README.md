@@ -7,9 +7,9 @@ for multiplexing the rows.
 Needed parts
 ------------
 
- * 1 x [TLC5940 Breakout](https://www.sparkfun.com/products/10616)
- * 5 x 330 Ohm resistor
- * 5 x BC337 NPN resistor
+* 1 x [TLC5940 Breakout](https://www.sparkfun.com/products/10616)
+* 5 x 330 Ohm resistor
+* 5 x BC337 NPN transistor
 
  TLC5940 Breakout
  ----------------
