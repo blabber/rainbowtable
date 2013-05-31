@@ -11,8 +11,8 @@ Needed parts
 * 5 x 330 Ohm resistor
 * 5 x BC337 NPN transistor
 
- TLC5940 Breakout
- ----------------
+TLC5940 Breakout
+----------------
 
 The pin setup for the TLC5940 Breakout is described in the BasicUse example
 distributed with the [tlc5940arduino
