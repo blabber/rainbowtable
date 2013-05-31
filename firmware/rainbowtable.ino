@@ -1,17 +1,22 @@
 #include "Tlc5940.h"
 
-const int RGB_LEDS = 5;
-const int DELTA_LED = 1000;
-
-const int MAX_COLOR = 12288;
-const int DELAY_COLOR = 10;
+const int DELTA_MAX = 1000;
 const int DELTA_COLOR = 10;
+const int DELAY_COLOR = 10;
+const int DELAY_ROW = 1.75;
 
+const int RGB_LEDS = 5;
 const int ROW_COUNT = 5;
 const int ROW_PINS[] = {
   A4, A0, A1, A2, A3};
-const int DELAY_ROW = 1.75;
-const int DELTA_ROW = 1000;
+
+const int MAX_COLOR = 12288;
+
+int deltaColumn = DELTA_MAX;
+int directionColumn = -1;
+
+int deltaRow = 0;
+int directionRow = 1;
 
 int baseColor = 0;
 int activeRow = 0;
@@ -47,6 +52,18 @@ void loop()
   if (lastColorChange + DELAY_COLOR <= currentMillis) {
     lastColorChange = currentMillis;
 
+    if ((directionRow > 0 && deltaRow < DELTA_MAX) 
+      || (directionRow < 0 && deltaRow > 0))
+      deltaRow += directionRow * DELTA_COLOR;
+    else
+      directionRow *= -1;
+
+    if ((directionColumn > 0 && deltaColumn < DELTA_MAX)
+      || (directionColumn < 0 && deltaColumn > 0))
+      deltaColumn += directionColumn * DELTA_COLOR;
+    else
+      directionColumn *= -1;
+
     baseColor = (baseColor + DELTA_COLOR) % MAX_COLOR;
   }
 }
@@ -54,7 +71,7 @@ void loop()
 void setRGBRow(int row, int color)
 {
   for (int l = 0; l < RGB_LEDS; l++) {
-    int color = (baseColor + l*DELTA_LED + row*DELTA_ROW) % MAX_COLOR;
+    int color = (baseColor + l*deltaColumn + row*deltaRow) % MAX_COLOR;
     setRGB(l, color);
   }
 }
@@ -102,4 +119,3 @@ void setRGB(int led, int color)
   Tlc.set(channel + 1, green);
   Tlc.set(channel + 2, blue);
 }
-
